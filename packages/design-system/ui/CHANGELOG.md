@@ -1,5 +1,14 @@
 # @medusajs/ui
 
+## 4.1.20
+
+### Patch Changes
+
+- [#14661](https://github.com/medusajs/medusa/pull/14661) [`8f97e3f3710a2bae662415dac7098e1c6e60c3c9`](https://github.com/medusajs/medusa/commit/8f97e3f3710a2bae662415dac7098e1c6e60c3c9) Thanks [@NicolasGorga](https://github.com/NicolasGorga)! - feat(dashboard,admin-vite-plugin,admin-shared,ui,settings,js-sdk,types): view configuration UI enhancements — dynamic filter/sort resolution, custom cell renderer registration, property labels management UI
+
+- Updated dependencies []:
+  - @medusajs/icons@2.18.0
+
 ## 4.1.19
 
 ### Patch Changes

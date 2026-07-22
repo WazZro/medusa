@@ -1,5 +1,17 @@
 # Change Log
 
+## 2.18.0
+
+### Patch Changes
+
+- [#16083](https://github.com/medusajs/medusa/pull/16083) [`d6b2a87da1dbfd065336c80e41cb7c086dc2a340`](https://github.com/medusajs/medusa/commit/d6b2a87da1dbfd065336c80e41cb7c086dc2a340) Thanks [@dependabot](https://github.com/apps/dependabot)! - chore(create-medusa-app, admin-bundler, dashboard, core-flows, framework, js-sdk, medusa): dependabot dependencies update
+
+- [`fc8d46652eaeaf7fa6862e20bfd84b8e64c77cc5`](undefined) - fix(create-medusa-app): fix ajv error in npm installation
+
+- Updated dependencies [[`d6b2a87da1dbfd065336c80e41cb7c086dc2a340`](https://github.com/medusajs/medusa/commit/d6b2a87da1dbfd065336c80e41cb7c086dc2a340)]:
+  - @medusajs/deps@2.18.0
+  - @medusajs/telemetry@2.18.0
+
 ## 2.17.2
 
 ### Patch Changes
