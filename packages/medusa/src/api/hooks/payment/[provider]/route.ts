@@ -3,13 +3,18 @@ import { Modules, PaymentWebhookEvents } from "@medusajs/framework/utils"
 
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 
+const DEFAULT_WEBHOOK_DELAY = 5000
+const DEFAULT_WEBHOOK_RETRIES = 3
+
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   try {
     const { provider } = req.params
 
-    const options: PaymentModuleOptions =
-      // @ts-expect-error "Not sure if .options exists on a module"
-      req.scope.resolve(Modules.PAYMENT).options || {}
+    // The Payment Module exposes the options it was registered with, but they
+    // aren't part of `IPaymentModuleService`, hence the explicit resolution type.
+    const { options = {} } = req.scope.resolve<{
+      options?: PaymentModuleOptions
+    }>(Modules.PAYMENT)
 
     const event = {
       provider,
@@ -25,8 +30,8 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
         data: event,
       },
       {
-        delay: options.webhook_delay || 5000,
-        attempts: options.webhook_retries || 3,
+        delay: options.webhook_delay ?? DEFAULT_WEBHOOK_DELAY,
+        attempts: options.webhook_retries ?? DEFAULT_WEBHOOK_RETRIES,
       }
     )
   } catch (err) {

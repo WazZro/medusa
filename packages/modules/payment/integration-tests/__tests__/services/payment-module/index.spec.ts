@@ -12,10 +12,27 @@ jest.setTimeout(30000)
 
 moduleIntegrationTestRunner<IPaymentModuleService>({
   moduleName: Modules.PAYMENT,
+  moduleOptions: {
+    webhook_delay: 1000,
+    webhook_retries: 10,
+  },
   testSuite: ({ MikroOrmWrapper, service }) => {
     describe("Payment Module Service", () => {
       beforeEach(() => {
         jest.clearAllMocks()
+      })
+
+      it(`should expose the options the module was registered with`, () => {
+        const { options } = service as unknown as {
+          options: Record<string, unknown>
+        }
+
+        expect(options).toEqual(
+          expect.objectContaining({
+            webhook_delay: 1000,
+            webhook_retries: 10,
+          })
+        )
       })
 
       it(`should export the appropriate linkable configuration`, () => {

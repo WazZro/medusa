@@ -69,6 +69,7 @@ import {
   RefundReason,
 } from "@models"
 import { joinerConfig } from "../joiner-config"
+import { PaymentModuleOptions } from "../types"
 import PaymentProviderService from "./payment-provider"
 
 type InjectedDependencies = {
@@ -138,7 +139,8 @@ export default class PaymentModuleService
       paymentCollectionService,
       accountHolderService,
     }: InjectedDependencies,
-    protected readonly moduleDeclaration: InternalModuleDeclaration
+    public readonly options: PaymentModuleOptions = {},
+    protected readonly moduleDeclaration?: InternalModuleDeclaration
   ) {
     // @ts-ignore
     super(...arguments)

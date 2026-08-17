@@ -2,31 +2,40 @@ import {
   Logger,
   ModuleProviderExports,
   ModuleServiceInitializeOptions,
+  PaymentModuleOptions as PaymentWebhookOptions,
 } from "@medusajs/framework/types"
 
 export type InitializeModuleInjectableDependencies = {
   logger?: Logger
 }
 
-export type PaymentModuleOptions = Partial<ModuleServiceInitializeOptions> & {
-  /**
-   * Providers to be registered
-   */
-  providers?: {
+/**
+ * `PaymentWebhookOptions` holds the webhook options (`webhook_delay` and
+ * `webhook_retries`) that are consumed by the `POST /hooks/payment/:provider`
+ * route. They're part of the options accepted by the module, so they have to be
+ * part of the type registered in the `ModuleOptions` registry, otherwise they
+ * can't be set in `medusa-config.ts`.
+ */
+export type PaymentModuleOptions = Partial<ModuleServiceInitializeOptions> &
+  PaymentWebhookOptions & {
     /**
-     * The module provider to be registered
+     * Providers to be registered
      */
-    resolve: string | ModuleProviderExports
-    /**
-     * The id of the provider
-     */
-    id: string
-    /**
-     * key value pair of the configuration to be passed to the provider constructor
-     */
-    options?: Record<string, unknown>
-  }[]
-}
+    providers?: {
+      /**
+       * The module provider to be registered
+       */
+      resolve: string | ModuleProviderExports
+      /**
+       * The id of the provider
+       */
+      id: string
+      /**
+       * key value pair of the configuration to be passed to the provider constructor
+       */
+      options?: Record<string, unknown>
+    }[]
+  }
 
 declare module "@medusajs/types" {
   interface ModuleOptions {
